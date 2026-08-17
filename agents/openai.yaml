@@ -1,0 +1,4 @@
+interface:
+  display_name: "AI短剧分镜导演"
+  short_description: "将短剧脚本拆解为连贯、可执行的电影级 AI 视频分镜"
+  default_prompt: "使用 $storyboard-director 将这份短剧脚本拆解为可直接制作的正式分镜。"
