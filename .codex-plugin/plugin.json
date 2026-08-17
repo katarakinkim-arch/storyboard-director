@@ -1,0 +1,26 @@
+{
+  "name": "storyboard-director",
+  "version": "1.0.0",
+  "description": "将短剧脚本拆解为适合 AI 视频制作的完整电影级分镜",
+  "author": {
+    "name": "katarakinkim-arch",
+    "url": "https://github.com/katarakinkim-arch"
+  },
+  "homepage": "https://github.com/katarakinkim-arch/storyboard-director",
+  "repository": "https://github.com/katarakinkim-arch/storyboard-director",
+  "keywords": ["storyboard", "ai-video", "short-drama", "director"],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "AI短剧分镜导演",
+    "shortDescription": "将短剧脚本拆解为可直接制作的电影级 AI 视频分镜",
+    "longDescription": "完整保留剧情与台词，设计开场钩子、重要角色出场、景别、构图、运镜、连续性、特殊机制和集尾钩子，生成适合 AI 视频制作与后期剪辑的正式分镜。",
+    "developerName": "katarakinkim-arch",
+    "category": "Productivity",
+    "capabilities": [],
+    "defaultPrompt": [
+      "把这份短剧脚本拆解成适合 AI 视频制作的正式分镜。",
+      "强化本集开场钩子和重要角色出场，再完成整集分镜。",
+      "检查这份分镜的连续性、镜头承载和 AI 可执行性。"
+    ]
+  }
+}
