@@ -8,7 +8,12 @@
   },
   "homepage": "https://github.com/katarakinkim-arch/storyboard-director",
   "repository": "https://github.com/katarakinkim-arch/storyboard-director",
-  "keywords": ["storyboard", "ai-video", "short-drama", "director"],
+  "keywords": [
+    "storyboard",
+    "ai-video",
+    "short-drama",
+    "director"
+  ],
   "skills": "./skills/",
   "interface": {
     "displayName": "AI短剧分镜导演",

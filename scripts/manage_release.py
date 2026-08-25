@@ -14,7 +14,7 @@ from pathlib import Path
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
 PACKAGE_RELATIVE = Path("skills/storyboard-director")
-MANAGED_PATHS = (Path("SKILL.md"), Path("agents"), Path("references"))
+MANAGED_PATHS = (Path("SKILL.md"), Path("VERSION"), Path("agents"), Path("references"))
 SEMVER_RE = re.compile(r"^\d+\.\d+\.\d+(?:-[0-9A-Za-z.-]+)?$")
 
 

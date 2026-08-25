@@ -48,7 +48,12 @@ class ManageReleaseTests(unittest.TestCase):
     def test_release_updates_manifest_and_version(self) -> None:
         root = self.make_repo()
         manage_release.set_version("1.1.0", root)
+        manage_release.sync_package(root)
         self.assertEqual("1.1.0", (root / "VERSION").read_text(encoding="utf-8").strip())
+        self.assertEqual(
+            "1.1.0",
+            (root / "skills/storyboard-director/VERSION").read_text(encoding="utf-8").strip(),
+        )
         manifest = json.loads((root / ".codex-plugin/plugin.json").read_text(encoding="utf-8"))
         self.assertEqual("1.1.0", manifest["version"])
 
