@@ -1,6 +1,6 @@
 {
   "name": "storyboard-director",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "将短剧脚本拆解为适合 AI 视频制作的完整电影级分镜",
   "author": {
     "name": "katarakinkim-arch",

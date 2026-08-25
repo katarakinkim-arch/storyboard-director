@@ -11,6 +11,8 @@
 - 人物站位、180°轴线、视线、动作与道具连续性
 - 喜剧、反派、爆点、追逐、大场面、系统和卡牌等不同镜头语言
 - 单镜头时长与信息承载能力
+- 正常语速5秒约18—19字，并按情绪动态调整
+- 不设最低镜头数和固定运动镜头比例
 - AI 视频模型的实际可执行性
 - 集尾继续观看的钩子
 
@@ -30,16 +32,23 @@
 
 ```text
 storyboard-director/
+├── VERSION
 ├── SKILL.md
 ├── references/
-│   └── director-rules.md
-└── agents/
-    └── openai.yaml
+│   ├── director-rules.md
+│   └── ...
+├── agents/
+│   └── openai.yaml
+├── scripts/
+│   └── manage_release.py
+└── skills/storyboard-director/  # 由同步脚本生成的插件副本
 ```
 
 - `SKILL.md`：触发条件、核心工作流、优先级和输出格式。
 - `references/director-rules.md`：完整导演规则、特殊段落处理和最终自检。
 - `agents/openai.yaml`：Codex 界面中的名称、简介和默认调用提示。
+- `scripts/manage_release.py`：同步插件副本、检查版本并准备发布。
+- `skills/storyboard-director/`：插件安装使用的生成目录，不作为人工编辑源。
 
 ## 安装方法
 
@@ -129,10 +138,36 @@ Skill 默认先建立场景站位与轴线，再按自然戏剧阶段划分单�
 【时长：0-2秒】
 画面：……
 运镜：……
+剪辑/动态效果：……
 台词：……
 ```
 
 每个单元从 0 秒重新计时，单元内部时间连续。无台词写为 `台词：无`，OS 和 VO 会明确标注。
+
+每个镜头固定输出：时长、画面、运镜、剪辑/动态效果和台词。没有特殊剪辑或动态效果时写 `剪辑/动态效果：无`。
+
+默认正常语速按5秒约18—19个中文字估算，并根据激动、悲伤、迟疑等情绪动态调整。每个单元不设最低镜头数，运动镜头比例也不设固定值。
+
+## 更新与发布
+
+根目录中的 `SKILL.md`、`agents/` 和 `references/` 是唯一编辑源。不要直接修改 `skills/storyboard-director/`。
+
+修改规则或案例后同步插件副本：
+
+```bash
+python scripts/manage_release.py sync
+python scripts/manage_release.py check
+```
+
+准备新版本时使用语义化版本号：
+
+```bash
+python scripts/manage_release.py release 1.2.0
+```
+
+该命令会同时更新 `VERSION` 与 `.codex-plugin/plugin.json`、重新生成插件副本并执行一致性检查。GitHub Actions 会在每次推送和拉取请求中检查同步状态与版本一致性。
+
+安装或更新后，应在新的 Codex 任务中调用，以确保读取最新版 Skill。
 
 ## 继续更新这套 Skill
 
