@@ -18,6 +18,10 @@ class SkillContractTests(unittest.TestCase):
         cls.regressions = (ROOT / "references/storyboard-regression-library.md").read_text(
             encoding="utf-8"
         )
+        cls.technical = (ROOT / "references/technical-continuity.md").read_text(
+            encoding="utf-8"
+        )
+        cls.director = (ROOT / "references/director-rules.md").read_text(encoding="utf-8")
 
     def test_story_first_is_the_creative_core(self) -> None:
         self.assertIn("故事是核心，镜头是讲故事的方法", self.skill)
@@ -64,11 +68,46 @@ class SkillContractTests(unittest.TestCase):
         for phrase in forbidden:
             self.assertNotIn(phrase, self.skill)
 
+    def test_shot_duration_uses_content_load_not_uniform_length(self) -> None:
+        for phrase in (
+            "识别主体所需时间 ＋ 动作／台词／信息变化所需时间 ＋ 结果停留与情绪落地时间",
+            "以下只用于估时和发现异常，不是必须达到的配额",
+            "平均镜头时长（ASL）只用于发现节奏倾向，不作为目标",
+            "连续5镜以上都落在相近的1—1.5秒",
+        ):
+            self.assertIn(phrase, self.technical)
+        self.assertIn("观众识别主体＋看懂动作／台词变化＋感受结果", self.skill)
+
+    def test_key_moments_and_character_entrances_avoid_rendering_inflation(self) -> None:
+        for phrase in (
+            "出场的四个功能阶段",
+            "定义性行动",
+            "关键时刻的渲染",
+            "主要时刻",
+            "铺垫／蓄力",
+            "对比优于堆叠",
+            "若删去特效和运镜后事件本身不再重要",
+        ):
+            self.assertIn(phrase, self.director)
+        for phrase in ("等时碎切与渲染通胀", "不统一套出场模板", "高光结果必须延续"):
+            self.assertIn(phrase, self.regressions)
+
     def test_example_grades_and_format_boundaries(self) -> None:
         self.assertIn("标杆／非常好", self.examples)
-        self.assertGreaterEqual(self.examples.count("不错／选择性参考"), 3)
+        self.assertGreaterEqual(self.examples.count("不错／选择性参考"), 4)
         self.assertIn("仅学习分镜设计，不学习整体输出格式", self.examples)
         self.assertIn("不得继承", self.examples)
+
+    def test_orca_rescue_case_preserves_only_reusable_design(self) -> None:
+        for phrase in (
+            "案例004｜受伤虎鲸救援与深海巨物苏醒",
+            "威胁变受害者",
+            "用平行误判制造戏剧性反讽",
+            "仅学习故事递进与分镜设计，不学习整体输出格式",
+            "不得无过渡改成头顶出现",
+            "不得拆成四个编号镜头",
+        ):
+            self.assertIn(phrase, self.examples)
 
     def test_manual_edits_are_not_attributed_to_ai(self) -> None:
         expected = "脚从大腿滑到胸口\u201d和\u201c扣住脚踝\u201d是用户人工添加"
