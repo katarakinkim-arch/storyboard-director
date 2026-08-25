@@ -1,7 +1,7 @@
 {
   "name": "storyboard-director",
-  "version": "1.1.0",
-  "description": "将短剧脚本拆解为适合 AI 视频制作的完整电影级分镜",
+  "version": "2.0.0",
+  "description": "先理解故事、人物关系与戏剧变化，再拆解为适合 AI 视频制作的完整电影级分镜",
   "author": {
     "name": "katarakinkim-arch",
     "url": "https://github.com/katarakinkim-arch"
@@ -17,15 +17,15 @@
   "skills": "./skills/",
   "interface": {
     "displayName": "AI短剧分镜导演",
-    "shortDescription": "将短剧脚本拆解为可直接制作的电影级 AI 视频分镜",
-    "longDescription": "完整保留剧情与台词，设计开场钩子、重要角色出场、景别、构图、运镜、连续性、特殊机制和集尾钩子，生成适合 AI 视频制作与后期剪辑的正式分镜。",
+    "shortDescription": "故事优先的电影级 AI 视频分镜",
+    "longDescription": "先理解人物目标、冲突、观众情感站位与场景变化，再选择镜头方法；完整保留剧情与台词，控制时长、轴线、动作和道具连续性，生成适合 AI 视频制作与后期剪辑的正式分镜。",
     "developerName": "katarakinkim-arch",
     "category": "Productivity",
     "capabilities": [],
     "defaultPrompt": [
-      "把这份短剧脚本拆解成适合 AI 视频制作的正式分镜。",
-      "强化本集开场钩子和重要角色出场，再完成整集分镜。",
-      "检查这份分镜的连续性、镜头承载和 AI 可执行性。"
+      "先读懂这份短剧的故事推进和人物关系，再拆解成适合 AI 视频制作的正式分镜。",
+      "围绕本集的核心冲突与视觉引擎强化开场、转折和结尾，再完成整集分镜。",
+      "检查这份分镜的故事效果、对话视觉变化、连续性和 AI 可执行性。"
     ]
   }
 }
