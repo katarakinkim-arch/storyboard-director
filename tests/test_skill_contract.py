@@ -22,6 +22,15 @@ class SkillContractTests(unittest.TestCase):
             encoding="utf-8"
         )
         cls.director = (ROOT / "references/director-rules.md").read_text(encoding="utf-8")
+        cls.camera_moves = (ROOT / "references/user-curated-camera-moves.md").read_text(
+            encoding="utf-8"
+        )
+        cls.story_first = (ROOT / "references/story-first-directing.md").read_text(
+            encoding="utf-8"
+        )
+        cls.dialogue = (ROOT / "references/dialogue-visual-storytelling.md").read_text(
+            encoding="utf-8"
+        )
 
     def test_story_first_is_the_creative_core(self) -> None:
         self.assertIn("故事是核心，镜头是讲故事的方法", self.skill)
@@ -36,6 +45,7 @@ class SkillContractTests(unittest.TestCase):
             "dialogue-visual-storytelling.md",
             "suspense-action-spectacle.md",
             "director-rules.md",
+            "user-curated-camera-moves.md",
             "storyboard-example-library.md",
             "storyboard-regression-library.md",
         }
@@ -92,6 +102,51 @@ class SkillContractTests(unittest.TestCase):
         for phrase in ("等时碎切与渲染通胀", "不统一套出场模板", "高光结果必须延续"):
             self.assertIn(phrase, self.regressions)
 
+    def test_repeated_visual_motifs_require_state_progression(self) -> None:
+        for phrase in (
+            "视觉母题的状态阶梯",
+            "位置",
+            "接触与受力",
+            "主动权",
+            "视觉增量测试",
+            "程度升级只有越过明确阈值时才成立",
+        ):
+            self.assertIn(phrase, self.story_first)
+        for phrase in (
+            "身体细节与道具必须形成状态推进",
+            "同义重复",
+            "退路消失",
+            "没有新状态时不要为了维持母题强行插镜",
+        ):
+            self.assertIn(phrase, self.dialogue)
+
+    def test_foot_comparison_is_scoped_to_the_user_feedback(self) -> None:
+        for phrase in (
+            "回归005｜视觉母题原地踏步",
+            "镜头1、3、4",
+            "只认可其脚部母题具有较明显的阶段推进",
+            "32.5秒",
+            "位置—阻断—接触—阈值—僵住—余震",
+            "认可仅限脚部变化",
+        ):
+            self.assertIn(phrase, self.regressions)
+        self.assertIn("同一视觉母题反复出现时", self.skill)
+
+    def test_stealth_attack_regression_preserves_failure_scope(self) -> None:
+        for phrase in (
+            "回归006｜洞府暗算：毒火效果升级替代行动意义",
+            "把“特效状态”误当成“故事状态”",
+            "太便宜他了",
+            "镜头3与镜头6",
+            "镜头4与镜头5",
+            "紫色→蓝色",
+            "观察目标 → 原计划或初始冲动 → 新证据／判断 → 手段改变 → 执行 → 可见后果",
+            "不得自行选择其中一种后果",
+            "固定摄影机、近景和特写不是天然错误",
+            "颜色变化可以承担信息",
+        ):
+            self.assertIn(phrase, self.regressions)
+
     def test_example_grades_and_format_boundaries(self) -> None:
         self.assertIn("标杆／非常好", self.examples)
         self.assertGreaterEqual(self.examples.count("不错／选择性参考"), 4)
@@ -106,6 +161,54 @@ class SkillContractTests(unittest.TestCase):
             "仅学习故事递进与分镜设计，不学习整体输出格式",
             "不得无过渡改成头顶出现",
             "不得拆成四个编号镜头",
+        ):
+            self.assertIn(phrase, self.examples)
+
+    def test_benchmark_ensemble_entrance_preserves_hierarchy_and_ai_fallback(self) -> None:
+        for phrase in (
+            "案例005｜九龙封宫与屋檐群像接力登场",
+            "【标杆／非常好】",
+            "秦然不参与众统领的从天而降",
+            "统领强势降临，秦然早已在场且姿态散漫",
+            "群像焦点接力",
+            "七人大全景",
+            "图片文件未收录进Skill仓库",
+            "复杂AI视频不必强求整段12—16秒真正一次生成",
+        ):
+            self.assertIn(phrase, self.examples)
+
+        for phrase in (
+            "CAM-008｜群像接力式 Bay 环绕——前景拉焦与领袖遮挡揭示",
+            "统领2从前景盲区猛然转入",
+            "身体擦镜",
+            "下属共同完成的强势降落",
+            "将长运动拆为三段",
+            "领袖稳定揭示",
+        ):
+            self.assertIn(phrase, self.camera_moves)
+
+        for phrase in (
+            "势力群像与领袖压轴",
+            "共同力量先落地",
+            "个体差异再成立",
+            "领袖用反差定级",
+            "关系全景作确认",
+        ):
+            self.assertIn(phrase, self.director)
+
+    def test_physical_comedy_case_is_selective_and_angle_aware(self) -> None:
+        for phrase in (
+            "案例006｜洞府中招与满屋失控",
+            "【整体挺好／不错／选择性参考】",
+            "角度太像，基本上都是平视",
+            "身体—判断—语言—空间—落空—后果",
+            "建立四个机位锚点",
+            "窗边或人物正侧方近距离机位",
+            "洞府高角度三分之四主镜头",
+            "家具旁低机位",
+            "门外反拍机位",
+            "摄影机固定不是缺点",
+            "不因为案例整体不错就学习其全部字段",
         ):
             self.assertIn(phrase, self.examples)
 
