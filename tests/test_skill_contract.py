@@ -116,6 +116,34 @@ class StoryboardSkillContractTests(unittest.TestCase):
         ):
             self.assertIn(phrase, regressions)
 
+    def test_scale_angle_and_physical_camera_positions_are_separate(self) -> None:
+        core = (REFS / "core-story-performance.md").read_text(encoding="utf-8")
+        for phrase in (
+            "景别与角度分开规划", "景别回答“观众离信息多近”",
+            "角度回答“观众从什么关系位置观看”", "三种功能景别",
+            "三个真实观察位", "相邻三镜不得同时保持",
+        ):
+            self.assertIn(phrase, core)
+        self.assertIn("物理机位与前景图", SKILL)
+
+    def test_foreground_has_inventory_geometry_and_function(self) -> None:
+        technical = (REFS / "continuity-timing-output.md").read_text(encoding="utf-8")
+        for phrase in (
+            "前景清单", "至少使用一个前景构图", "建立纵深和人物距离",
+            "默认让前景停留在画面边缘或一侧", "普通关系镜只使用一个主要前景层",
+            "不能为了得到 OTS 让人物换边或瞬移",
+        ):
+            self.assertIn(phrase, technical)
+
+    def test_motion_has_minimum_trigger_conversion_and_single_path(self) -> None:
+        technical = (REFS / "continuity-timing-output.md").read_text(encoding="utf-8")
+        for phrase in (
+            "至少选择两个最重要的触发点转化为运动镜头",
+            "每镜只设一条主要摄影机路径", "不得把“下降＋前推＋环绕＋拉焦”",
+            "运动镜头的落幅必须与起幅不同",
+        ):
+            self.assertIn(phrase, technical)
+
 
 if __name__ == "__main__":
     unittest.main()
