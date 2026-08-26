@@ -86,6 +86,36 @@ class StoryboardSkillContractTests(unittest.TestCase):
         for phrase in ("Michael Bay", "动画动作分镜语言库", "3D动画的故事节奏", "VIS-002", "案例008", "夸张喜剧表情词库", "回归007"):
             self.assertIn(phrase, joined)
 
+    def test_shot_family_planning_precedes_shot_writing(self) -> None:
+        core = (REFS / "core-story-performance.md").read_text(encoding="utf-8")
+        for phrase in (
+            "镜头家族预排", "空间关系位", "表演位", "结果位", "主观信息位",
+            "动作路径位", "因果细节位", "环境后果位",
+            "不得边写台词边临时选择“近景／固定”",
+            "角度必须来自人物与空间",
+        ):
+            self.assertIn(phrase, core)
+        self.assertIn("镜头家族表", SKILL)
+
+    def test_camera_motion_uses_triggers_not_quota(self) -> None:
+        technical = (REFS / "continuity-timing-output.md").read_text(encoding="utf-8")
+        for phrase in (
+            "运动触发表", "人物从一个位置移动到另一个位置", "权力由一方转移到另一方",
+            "起幅看什么", "最后落在什么新信息或结果上",
+            "无明确落幅的缓推仍按固定镜头处理",
+            "这是诊断阈值，不是强制配额",
+        ):
+            self.assertIn(phrase, technical)
+        self.assertIn("不得以“近景／中近景＋固定”为默认起点", SKILL)
+
+    def test_regression_covers_static_closeup_collapse(self) -> None:
+        regressions = (REFS / "storyboard-regression-library.md").read_text(encoding="utf-8")
+        for phrase in (
+            "回归008｜近景固定退化", "没有先为戏剧节拍分配观察任务",
+            "镜头家族表和运动触发表", "只添加“微”字",
+        ):
+            self.assertIn(phrase, regressions)
+
 
 if __name__ == "__main__":
     unittest.main()
