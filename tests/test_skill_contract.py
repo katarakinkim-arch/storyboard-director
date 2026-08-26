@@ -21,6 +21,9 @@ class SkillContractTests(unittest.TestCase):
         cls.technical = (ROOT / "references/technical-continuity.md").read_text(
             encoding="utf-8"
         )
+        cls.quality_gate = (ROOT / "references/storyboard-quality-gate.md").read_text(
+            encoding="utf-8"
+        )
         cls.director = (ROOT / "references/director-rules.md").read_text(encoding="utf-8")
         cls.camera_moves = (ROOT / "references/user-curated-camera-moves.md").read_text(
             encoding="utf-8"
@@ -57,6 +60,7 @@ class SkillContractTests(unittest.TestCase):
         required = {
             "story-first-directing.md",
             "technical-continuity.md",
+            "storyboard-quality-gate.md",
             "dialogue-visual-storytelling.md",
             "suspense-action-spectacle.md",
             "director-rules.md",
@@ -73,6 +77,7 @@ class SkillContractTests(unittest.TestCase):
         )[0]
         self.assertIn("story-first-directing.md", mandatory)
         self.assertIn("technical-continuity.md", mandatory)
+        self.assertIn("storyboard-quality-gate.md", mandatory)
         self.assertNotIn("director-rules.md", mandatory)
         self.assertNotIn("storyboard-example-library.md", mandatory)
 
@@ -412,6 +417,46 @@ class SkillContractTests(unittest.TestCase):
         self.assertIn("微小细节承担线索、材质、产品卖点、尺度变化或转场功能", self.skill)
         self.assertIn("通用运动方法可按故事主动使用", self.skill)
         self.assertIn("每章只设一种主要导演语言", self.skill)
+
+    def test_visual_signature_and_mobile_companion_continuity_are_enforced(self) -> None:
+        for phrase in (
+            "视觉签名",
+            "主体、景别、摄影机高度、水平观察方位、前中后景关系、运动路径与叙事功能",
+            "活动配角与道具的位置账本",
+            "前景几何合法性",
+            "不能在正面镜头中凭空放大到画面边缘",
+        ):
+            self.assertTrue(phrase in self.skill or phrase in self.technical)
+
+        for phrase in (
+            "回归007｜静态修炼：换描述不换画面与渡鸦瞬移",
+            "掌控—触顶—反噬—诊断—改变策略",
+            "构图驱动的瞬移",
+            "始终留在左肩",
+            "换了支撑面",
+        ):
+            self.assertIn(phrase, self.regressions)
+
+    def test_quality_gate_closes_remaining_continuity_and_style_loopholes(self) -> None:
+        for phrase in (
+            "初稿不是交付稿",
+            "六轮审片",
+            "遮挡只能隐藏一段已经合理发生的移动",
+            "章节计时归零不代表故事状态归零",
+            "完整360°不得覆盖该规则",
+            "15°只作感知诊断",
+            "未经建立的经脉显影",
+            "它仍在场",
+        ):
+            self.assertIn(phrase, self.quality_gate)
+
+        for phrase in (
+            "完成初稿后不得直接交付",
+            "导演卡不得覆盖轴线连续性",
+            "遮挡本身不能解释换位",
+            "位置连续不等于每镜都要给反应",
+        ):
+            self.assertTrue(phrase in self.skill or phrase in self.technical)
 
 if __name__ == "__main__":
     unittest.main()
