@@ -144,6 +144,27 @@ class StoryboardSkillContractTests(unittest.TestCase):
         ):
             self.assertIn(phrase, technical)
 
+    def test_dialogue_subtext_is_evidence_based_and_non_inventive(self) -> None:
+        core = (REFS / "core-story-performance.md").read_text(encoding="utf-8")
+        for phrase in (
+            "对白潜台词转为可见表演", "称呼是否从身份、昵称、尊称变成全名",
+            "高可信潜台词", "中可信潜台词", "低可信推测",
+            "台词证据 → 当前意图／防御 → 可观察行为",
+            "不能因此直接新增摔杯、拥抱、下跪、攻击、哭泣或离场",
+            "潜台词推导只负责把已有关系拍出来，不创造新事实",
+        ):
+            self.assertIn(phrase, core)
+
+    def test_case_009_preserves_subtext_methods_without_globalizing_preferences(self) -> None:
+        examples = (REFS / "storyboard-example-library.md").read_text(encoding="utf-8")
+        for phrase in (
+            "案例009｜重生夜暧昧试探与喜剧抽身", "【不错的分镜／选择性参考】",
+            "从对白提取关系动作", "让视觉母题形成状态链", "保持连续场面动作",
+            "用期待落差完成喜剧", "不能作为景别角度标杆",
+            "不继承脚部镜头数量", "不学习案例的自检结论和旧版排版",
+        ):
+            self.assertIn(phrase, examples)
+
 
 if __name__ == "__main__":
     unittest.main()
