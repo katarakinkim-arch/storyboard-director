@@ -1,6 +1,6 @@
 {
   "name": "storyboard-director",
-  "version": "2.1.3",
+  "version": "2.1.4",
   "description": "先理解故事、人物关系与戏剧变化，再拆解为适合 AI 视频制作的完整电影级分镜",
   "author": {
     "name": "katarakinkim-arch",

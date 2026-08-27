@@ -165,6 +165,19 @@ class StoryboardSkillContractTests(unittest.TestCase):
         ):
             self.assertIn(phrase, examples)
 
+    def test_female_romance_cases_preserve_methods_and_conflict_boundaries(self) -> None:
+        examples = (REFS / "storyboard-example-library.md").read_text(encoding="utf-8")
+        for phrase in (
+            "案例010｜邮轮婚礼无人机记忆符号与克制告白",
+            "壮观场面必须同时具有私人意义", "反应链比奇观本身更重要",
+            "不能每镜重新从 `0.0s` 开始", "不是女频剧情的默认配置",
+            "案例011｜邮轮奔跑宣言、亲吻与远景收束",
+            "把感情命题变成一条身体行动线", "用动静变化制造情绪高潮",
+            "一行台词对应一个新镜头", "旁观者视角”与人物直视镜头互相冲突",
+            "默认改为轴线同侧的小弧度环绕", "没有剧本支持不得擅自添加",
+        ):
+            self.assertIn(phrase, examples)
+
 
 if __name__ == "__main__":
     unittest.main()
